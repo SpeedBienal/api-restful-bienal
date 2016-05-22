@@ -1,0 +1,28 @@
+{
+  "name": "mean",
+  "authors": [
+    "Malows <cruz.jm.stafe@gmail.com>"
+  ],
+  "description": "Primera aplicación con MEAN",
+  "main": "server",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.4.9",
+    "bootstrap": "^3.3.6",
+    "angular-route": "^1.4.9",
+    "angular-resource": "^1.4.9"
+  }
+}

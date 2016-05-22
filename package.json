@@ -1,0 +1,33 @@
+{
+  "name": "api-bienal",
+  "version": "0.0.1",
+  "description": "api restful de la bienal de arte joven - hackathon",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "compression": "^1.6.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.1.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.3",
+    "express-session": "^1.13.0",
+    "grunt": "^0.4.5",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.17",
+    "morgan": "^1.6.1",
+    "node-restful": "^0.2.5",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^0.2.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.3",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Malows",
+  "license": "MIT"
+}
