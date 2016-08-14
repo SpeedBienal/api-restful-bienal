@@ -3,7 +3,7 @@
   "authors": [
     "Malows <cruz.jm.stafe@gmail.com>"
   ],
-  "description": "Primera aplicación con MEAN",
+  "description": "Bienal Digital",
   "main": "server",
   "moduleType": [
     "amd",
@@ -20,9 +20,10 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.4.9",
-    "bootstrap": "^3.3.6",
-    "angular-route": "^1.4.9",
-    "angular-resource": "^1.4.9"
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0",
+    "angular-ui-router": "^0.3.1",
+    "angular-chart.js": "angular-chartjs#^1.0.0"
   }
 }

@@ -1,29 +1,50 @@
 var mongoose = require('mongoose');
-var restful = require('node-restful');
+var Schema = mongoose.Schema;
 
-var Obra = restful.model( 'obra', new mongoose.Schema({
-  nombre: {
-    type: 'String',
+var ObraSchema = new Schema({
+  titulo: {
+    type: String,
     required: true,
   },
-  campo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Campo',
+  autor: {
+    type: Schema.ObjectId,
+    required: true,
   },
-  catergoria: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Categoria',
+  categoria: {
+    type: String,
+    required: true,
+    enum: ['audiovisuales','visuales','musica','escenicas','letras'],
   },
-  artistas: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Artista',
+  clase: {
+    type: String,
+    required: true,
+    enum: ['A','B'],
   },
-  votos: {
-    type: 'Number',
-    default: 0,
+  tecnica: {
+    type: String,
   },
-  url: 'String',
-}))
-.methods([ 'get', 'post', 'put', 'delete' ]);
+  created: {
+    type: Date,
+    default: Date.now
+  }
+});
 
-module.exports = Obra;
+ObraSchema.statics.findByAutor = function (autor, callback) {
+  this.find( { autor: new RegEx( autor, 'i') }, callback );
+};
+
+ObraSchema.statics.findByFiltro = function (filtro, callback) {
+  this.$where( function () {
+    return
+      this.titulo.toLowerCase().includes(filtro.toLowerCase()) ||
+      this.autor.toLowerCase().includes(filtro.toLowerCase());
+  }, callback);
+};
+
+ObraSchema.statics.findByCategoria = function (categoria, callback) {
+  this.find( { "categoria": new RegExp( '^'+categoria+'$', 'i' ) }, callback);
+};
+
+ObraSchema.set( 'toJSON', { getters: true } );
+
+mongoose.model('Obra', ObraSchema);

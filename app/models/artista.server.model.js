@@ -1,19 +1,35 @@
 var mongoose = require('mongoose');
 var restful = require('node-restful');
 
-var Artista = restful.model('artista', new mongoose.Schema({
+var ArtistaSchema = new mongoose.Schema({
   pseudonimo: {
     type: 'String'
   },
-  persona_real: {
-    type: [mongoose.Schema.Types.ObjectId],
-    required: true
-  },
-  contacto: {
-    type: 'String',
+  nombre: {
+    type: String,
     required: true,
   },
-}))
-.methods([ 'get', 'post', 'put', 'delete' ]);
+  apellido: {
+    type: String,
+    required: true,
+  },
+  dni: {
+    type: Number,
+    index: true,
+    unique: true,
+    required: true,
+    set: function (entrada) {
+      entrada = entrada.toString();
+      entrada = entrada.replace(/[,.\s]+/g, "").trim();
+      return parseInt(entrada);
+    },
+  },
+  email: {
+   type: String,
+   unique: true,
+   required: true,
+   match: [ /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/igm, 'Fill me with a valid E-Mail adress plizchu!' ]
+ },
+});
 
-module.exports = Artista;
+mongoose.model('Artista', ArtistaSchema);

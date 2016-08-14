@@ -11,7 +11,6 @@
     "cookie-parser": "^1.4.1",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
-    "grunt": "^0.4.5",
     "jade": "^1.11.0",
     "method-override": "^2.3.5",
     "mongoose": "^4.4.17",

@@ -1,5 +1,5 @@
 module.exports = {
-  db : 'mongodb://localhost/mean-book',
+  db : 'mongodb://localhost/bienal-dev',
   sessionSecret : 'developmentSessionSecret',
   twitter: {
     consumerKey: 'cs6B77jUI45rnzEOF8RFj7Nbz',
