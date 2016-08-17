@@ -3,7 +3,7 @@ var restful = require('node-restful');
 
 var ArtistaSchema = new mongoose.Schema({
   pseudonimo: {
-    type: 'String'
+    type: String
   },
   nombre: {
     type: String,
@@ -15,7 +15,6 @@ var ArtistaSchema = new mongoose.Schema({
   },
   dni: {
     type: Number,
-    index: true,
     unique: true,
     required: true,
     set: function (entrada) {

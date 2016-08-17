@@ -8,24 +8,19 @@
   <meta name="description" content="">
   <meta name="author" content="Malows">
 
-
   <title>12° Bienal Arte Joven</title>
 
   <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
-
   <link href="css/stylesheet.css" rel="stylesheet">
 
-  <!-- <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> -->
-  <!-- <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'> -->
 </head>
 
 <body id="inicio">
-
   <div class="brand">Bienal Arte Joven</div>
   <div class="address-bar">Rectorado, UNL, siempre cerca de tu corazón</div>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-default" role="navigation">
+  <nav id=barra-navegadora class="navbar navbar-default" role="navigation">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header page-scroll">
@@ -148,9 +143,6 @@
         <div class="row text-center">
           <div class="col-sm-12 col-md-6">
             <a class="twitter-timeline"  href="https://twitter.com/hashtag/SoyBienal" data-widget-id="763624566107275264">Tweets sobre #SoyBienal</a>
-            <script>
-              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-            </script>
           </div>
           <div class="col-sm-12 col-md-6">
             FACEBOOK BADGE PLACEHOLDER
@@ -181,19 +173,26 @@
     </section>
   </div>
   <!-- /.container -->
+
+  <!-- Botón que lleva a ver votación -->
+  <nav class="navbar navbar-fixed-bottom">
+    <div class="container-fluid">
+      <a href="http://localhost:3000/votacion.html" class="btn btn-lg btn-success navbar-btn navbar-right" style="margin-right: 0.5em;">Ver Votación</a>
+    </div>
+  </nav>
+
   <footer>
     <div class="container">
-      <div class="box col-md-10 col-sm-12 col-md-offset-1">
-        <div class="text-center">
-          <img class="img-responsive" src="img/pie-de-pagina2.png">
-        </div>
-      </div>
+      <img class="img-responsive col-xs-12" src="img/pie-de-pagina-juan.png">
     </div>
   </footer>
 
-  <script src="js/bundle.js"></script>
+  <script src="./js/bundle.js"></script>
+  <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  </script>
   <script async defer
- src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7YGS5YL3Sits9Tsx3PPpI5H3S3s-SY_A&callback=initMap"></script>
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7YGS5YL3Sits9Tsx3PPpI5H3S3s-SY_A&callback=initMap"></script>
 
 </body>
 

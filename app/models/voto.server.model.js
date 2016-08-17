@@ -43,10 +43,6 @@ VotoSchema.statics.totalCategoria = function (categoria, callback) {
   this.count({"categoria": categoria}, callback);
 };
 
-VotoSchema.statics.top = function (callback) {
-  VotoSchema.statics.top3ByCategoria('audiovisuales',)
-}
-
 VotoSchema.set( 'toJSON', { getters: true } );
 
 mongoose.model('Voto', VotoSchema);

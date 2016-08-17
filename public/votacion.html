@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Malows">
+
+  <title>12° Bienal Arte Joven</title>
+
+  <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+  <link href="css/stylesheet.css" rel="stylesheet">
+
+</head>
+
+<body ng-app="votacion" ng-controller="VotacionController">
+  <div class="brand">Bienal Arte Joven</div>
+  <div class="address-bar">Rectorado, UNL, siempre cerca de tu corazón</div>
+
+
+  <div class="container box">
+    <div class="row">
+
+      <div class="col-md-2 col-md-offset-1 col-xs-12 text-center">
+        <h4>Audiovisuales</h4>
+        <canvas id="av-chart" class="chart chart-pie"
+          chart-data="audiovisuales.data" chart-labels="audiovisuales.labels" chart-colors="audiovisuales.colors">
+        </canvas>
+        <div class="text-justify">
+          <p><strong>Total de votos:</strong>{{ audiovisuales.data[0]+audiovisuales.data[1]+audiovisuales.data[2]+audiovisuales.data[3] }}</p>
+          <p>{{audiovisuales.labels[0]}} {{audiovisuales.data[0]}}</p>
+          <p>{{audiovisuales.labels[1]}} {{audiovisuales.data[1]}}</p>
+          <p>{{audiovisuales.labels[2]}} {{audiovisuales.data[2]}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-xs-12 text-center">
+        <h4>Música</h4>
+        <canvas id="m-chart" class="chart chart-pie"
+          chart-data="musica.data" chart-labels="musica.labels" chart-colors="musica.colors">
+        </canvas>
+        <div class="text-justify">
+          <p><strong>Total de votos:</strong>{{ musica.data[0]+musica.data[1]+musica.data[2]+musica.data[3] }}</p>
+          <p>{{musica.labels[0]}} {{musica.data[0]}}</p>
+          <p>{{musica.labels[1]}} {{musica.data[1]}}</p>
+          <p>{{musica.labels[2]}} {{musica.data[2]}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-xs-12 text-center">
+        <h4>Escénicas</h4>
+        <canvas id="e-chart" class="chart chart-pie"
+          chart-data="escenicas.data" chart-labels="escenicas.labels" chart-colors="escenicas.colors">
+        </canvas>
+        <div class="text-justify">
+          <p><strong>Total de votos:</strong>{{ escenicas.data[0]+escenicas.data[1]+escenicas.data[2]+escenicas.data[3] }}</p>
+          <p>{{escenicas.labels[0]}} {{escenicas.data[0]}}</p>
+          <p>{{escenicas.labels[1]}} {{escenicas.data[1]}}</p>
+          <p>{{escenicas.labels[2]}} {{escenicas.data[2]}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-xs-12 text-center">
+        <h4>Visuales</h4>
+        <canvas id="v-chart" class="chart chart-pie"
+          chart-data="visuales.data" chart-labels="visuales.labels" chart-colors="visuales.colors">
+        </canvas>
+        <div class="text-justify">
+          <p><strong>Total de votos:</strong>{{ visuales.data[0]+visuales.data[1]+visuales.data[2]+visuales.data[3] }}</p>
+          <p>{{visuales.labels[0]}} {{visuales.data[0]}}</p>
+          <p>{{visuales.labels[1]}} {{visuales.data[1]}}</p>
+          <p>{{visuales.labels[2]}} {{visuales.data[2]}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-xs-12 text-center">
+        <h4>Letras</h4>
+        <canvas id="l-chart" class="chart chart-pie"
+          chart-data="letras.data" chart-labels="letras.labels" chart-colors="letras.colors">
+        </canvas>
+        <div class="text-justify">
+          <p><strong>Total de votos:</strong>{{ letras.data[0]+letras.data[1]+letras.data[2]+letras.data[3] }}</p>
+          <p>{{letras.labels[0]}} {{letras.data[0]}}</p>
+          <p>{{letras.labels[1]}} {{letras.data[1]}}</p>
+          <p>{{letras.labels[2]}} {{letras.data[2]}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Botón que lleva a ver votación -->
+  <nav class="navbar navbar-fixed-bottom">
+    <div class="container-fluid">
+      <a href="http://localhost:3000/index.html" class="btn btn-lg btn-success navbar-btn" style="margin-left: 0.5em;">Volver al Inicio</a>
+    </div>
+  </nav>
+
+  <footer>
+    <div class="container">
+      <img class="img-responsive col-xs-12" src="img/pie-de-pagina.png">
+    </div>
+  </footer>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./lib/angular/angular.min.js"></script>
+  <script src="./lib/Chart.js/dist/Chart.min.js"></script>
+  <script src="./lib/angular-chart.js/dist/angular-chart.min.js"></script>
+
+  <script src="./js/controllers/VotacionController.js"></script>
+  <script src="./js/services/votacionService.js"></script>
+
+</body>
+
+</html>

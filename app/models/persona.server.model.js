@@ -33,7 +33,6 @@ var PersonaSchema = new Schema({
    required: true,
    unique: true
  },
-
   voto_musica: {
     type: Schema.ObjectId,
     ref: 'Obra',
@@ -69,6 +68,10 @@ PersonaSchema.statics.personaByEmail = function (email, callback) {
   this.find( { email: new RegEx( email, 'i') }, callback );
 };
 
+PersonaSchema.statics.personaByUuid = function (persona_uuid, callback) {
+  this.findOne( { uuid: new RegEx( persona_uuid, 'i') }, callback );
+};
+
 PersonaSchema.pre('save', function (next) {
   var array = [
     {obra: this.voto_audiovisuales, categoria: 'audiovisuales'},
@@ -80,16 +83,9 @@ PersonaSchema.pre('save', function (next) {
   Voto.create( array, function (err, arr) {
     if (err) {
       return next(err);
-    } else {
-      console.log("cree los votos con pre en persona");
     }
   });
-  console.log("se termino de cargar persona, voy a pasar a next");
   next();
-});
-
-PersonaScheme.post('save', function (next) {
-  //disparo el socket;
 });
 
 mongoose.model('Persona', PersonaSchema);

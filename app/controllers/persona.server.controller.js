@@ -16,7 +16,12 @@ exports.create = function (req, res, next) {
     if (err) {
       return next(err);
     } else {
-      //socket emit
+      var io = global.io;
+      io.emit('voto',{
+        type: 'status',
+        text: 'connected',
+        created: Date.now(),
+      });
       res.json(persona);
     }
   });
@@ -46,6 +51,15 @@ exports.delete = function (req, res, next) {
   });
 };
 
+exports.requireMobile = function ( req, res, next ) {
+  if ( !req.body.hasOwnProperty(uuid) ) {
+    return res.status(401).send( { message: 'Not allowed' } );
+  }
+  next();
+};
+
+
+
 exports.personaById = function (req, res, next, id) {
   Persona.findOne({ _id: id }, function (err, persona) {
     if (err) {
@@ -57,8 +71,8 @@ exports.personaById = function (req, res, next, id) {
   });
 };
 
-exports.personaByDNI = function (req, res, next, dni) {
-  Persona.findOne( {dni: dni}, function (err, persona) {
+exports.personaByUuId = function (req, res, next, persona_uuid) {
+  Persona.findOne( {uuid: persona_uuid}, function (err, persona) {
     if (err) {
       return next(err);
     } else {
