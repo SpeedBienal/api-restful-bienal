@@ -9,9 +9,13 @@ var mongoose = require('./config/mongoose');
 // Cargo express y sus configuraciones
 var express = require('./config/express');
 
+// Cargo passport.js para manejo de loggin y sesiones
+var passport = require('./config/passport');
+
 // Inicializaciones
 var db = mongoose();
 var app = express( db );
+var passport = passport();
 
 app.listen(3000);
 

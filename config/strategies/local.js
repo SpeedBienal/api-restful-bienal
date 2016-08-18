@@ -10,11 +10,11 @@ module.exports = function () {
       }
 
       if ( !user ) {
-        return done( null, false, { message: 'Usuario desconocido' } );
+        return done( null, false, { message: 'Usuario o contraseña incorrectos' } );//Sino te hacen fuerza bruta
       }
 
       if ( !user.validatePassword( password ) ) {
-        return done( null, false, { message: 'password incorrecta' } );
+        return done( null, false, { message: 'Usuario o contraseña incorrectos' } );//Sino te hacen fuerza bruta
       }
 
       return done( null, user );

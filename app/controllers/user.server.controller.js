@@ -23,25 +23,35 @@ var getErrorMessage = function( err ) {
 
 exports.requireLogin = function ( req, res, next ) {
   if ( !req.isAuthenticated() ) {
-    return res.status(401).send( { message: 'User is not logged in' } );
+    return res.status(401).send( { message: 'El usuario no esta loggeado' } );
   }
   next();
 };
 
-exports.renderSignIn = function ( req, res, next ) {
-  if ( !req.user ) {
-    res.render( 'signin', { title: 'Sign-in Form', messages: req.flash('error') || req.flash('info')});
-  } else {
-    return res.redirect( '/' );
-  }
+exports.isOwnerId = function ( req, res, next, id ) {
+  User.findOne( {_id: id }, function (err, user) {
+    if (err) {
+      return next(err);
+    } else {
+      if ( req.user._id !== user._id ) {
+        return res.status(401).send({message: 'El usuario no esta autorizado para realizar estas acciones'});
+      }
+      next();
+    }
+  });
 };
 
-exports.renderSignUp = function ( req, res, next ) {
-  if ( !req.user ) {
-    res.render( 'signup', { title: 'Sign-up Form', messages: req.flash( 'error' ) } );
-  } else {
-    return res.redirect( '/' );
-  }
+exports.isOwnerUsername = function ( req, res, next, username ) {
+  User.findOneByUsername( username, function ( err, user ) {
+    if (err) {
+      return next(err);
+    } else {
+      if ( req.user._id !== user._id ) {
+        return res.status(401).send({message: 'El usuario no esta autorizado para realizar estas acciones'});
+      }
+      next();
+    }
+  });
 };
 
 exports.signUp = function ( req, res, next ) {
@@ -72,31 +82,26 @@ exports.signOut = function ( req, res ) {
   res.redirect( '/' );
 };
 
-exports.saveOAuthUserProfile = function ( req, profile, done ) {
-  User.findOne({provider: profile.provider, providerId: profile.providerId}, function ( err, user ) {
-    if ( err ) {
-      return done( err );
-    } else {
-      if ( !user ) {
-        var posibleName = profile.username || ( profile.email ? prfile.email.split('@')[0] : '' );
-        User.findUniqueUsername( posibleName, null, function (avaibleUser) {
-          profile.username = avaibleUser;
+exports.renderSignIn = function ( req, res, next ) {
+  if ( !req.user ) {
+    res.render( 'signin', {
+      title: 'Ingreso al sistema',
+      messages: req.flash('error') || req.flash('info')
+    });
+  } else {
+    return res.redirect( '/' );
+  }
+};
 
-          user = new User(profile);
-          user.save( function ( err ) {
-            if ( err ) {
-              var message = getErrorMessage( err );
-              req.flash('error', message);
-              return res.redirect('/signup');
-            }
-            return done( err, user );
-          });
-        });
-      } else {
-        return done( err, user );
-      }
-    }
-  });
+exports.renderSignUp = function ( req, res, next ) {
+  if ( !req.user ) {
+    res.render( 'signup', {
+      title: 'Formulario de registro',
+      messages: req.flash( 'error' )
+    });
+  } else {
+    return res.redirect( '/' );
+  }
 };
 
 exports.create = function ( req, res, next ) {
@@ -124,6 +129,26 @@ exports.read = function ( req, res ) {
   res.json( req.user );
 };
 
+exports.update = function ( req, res, next ) {
+  User.findByIdAndUpdate( req.user.id, req.body, function ( err, user ) {
+    if ( err ) {
+      return next( err );
+    } else {
+      res.json( user );
+    }
+  } );
+};
+
+exports.delete = function ( req, res, next ) {
+  req.user.remove( function ( err, user ) {
+    if ( err ) {
+      return next( err );
+    } else {
+      res.json( req.user );
+    }
+  })
+};
+
 exports.userById = function ( req, res, next, id ) {
   User.findOne( { _id : id }, function ( err, user ) {
     if ( err ) {
@@ -145,23 +170,3 @@ exports.userByUsername = function ( req, res, next, username ) {
     }
   } );
 }
-
-exports.update = function ( req, res, next ) {
-  User.findByIdAndUpdate( req.user.id, req.body, function ( err, user ) {
-    if ( err ) {
-      return next( err );
-    } else {
-      res.json( user );
-    }
-  } );
-};
-
-exports.delete = function ( req, res, next ) {
-  req.user.remove( function ( err, user ) {
-    if ( err ) {
-      return next( err );
-    } else {
-      res.json( req.user );
-    }
-  })
-};

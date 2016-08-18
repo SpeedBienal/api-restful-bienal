@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var restful = require('node-restful');
 
 var ArtistaSchema = new mongoose.Schema({
   pseudonimo: {
