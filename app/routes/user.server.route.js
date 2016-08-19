@@ -16,6 +16,9 @@ module.exports = function( app ) {
     .put( users.requireLogin, users.isOwnerId, users.update )
     .delete( users.requireLogin, users.isOwnerId, users.delete );
 
+  app.route( '/' )
+    .get( users.renderHome );
+
   app.route( '/ingreso' )
     .get( users.renderSignIn )
     .post( passport.authenticate('local', {

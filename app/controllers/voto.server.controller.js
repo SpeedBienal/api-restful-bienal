@@ -118,3 +118,7 @@ exports.create = function (req, res, next) {
 exports.read = function (req, res) {
   res.json( req.voto );
 };
+
+exports.renderVotacion = function ( req, res ) {
+  res.render( 'votacion');
+};

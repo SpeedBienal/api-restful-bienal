@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    include ./includes/estilos.jade
+    title Resultados parciales en tiempo real
+  body(ng-app="votacion", ng-controller="VotacionController")
+    include ./includes/cabecera.jade
+    div.container.box
+      div.row
+      
+        div.col-md-2.col-md-offset-1.col-xs-12.text-center
+          - var aux = "audiovisuales";
+          h4 Audiovisuales
+          canvas#av-chart.chart.chart-pie(chart-data="#{aux}.data",chart-labels="#{aux}.labels",chart-colors="#{aux}.colors")
+          .text-justify
+            p
+              strong Total de votos
+              {{ #{aux}.data[0]+#{aux}.data[1]+#{aux}.data[2]+#{aux}.data[3] }}
+            p {{#{aux}.labels[0]}} {{#{aux}.data[0]}}
+            p {{#{aux}.labels[1]}} {{#{aux}.data[1]}}
+            p {{#{aux}.labels[2]}} {{#{aux}.data[2]}}
+            
+        each val, index in ["Música", "Escénicas", "Visuales","Letras"]    
+          div.col-md-2.col-xs-12.text-center
+            - var aux = val.toLowerCase().replace('é','e').replace('ú','u');
+            h4= val
+            canvas#av-chart.chart.chart-pie(chart-data="#{aux}.data",chart-labels="#{aux}.labels",chart-colors="#{aux}.colors")
+            .text-justify
+              p
+                strong Total de votos
+                {{ #{aux}.data[0]+#{aux}.data[1]+#{aux}.data[2]+#{aux}.data[3] }}
+              p {{#{aux}.labels[0]}} {{#{aux}.data[0]}}
+              p {{#{aux}.labels[1]}} {{#{aux}.data[1]}}
+              p {{#{aux}.labels[2]}} {{#{aux}.data[2]}}
+      nav.navbar.navbar-fixed-bottom
+        div.container-fluid
+          a.btn.btn-lg.btn-success.navbar-btn(href="http://localhost:3000/", style="margin-left: 0.5em;") Volver al Inicio
+      include ./includes/footer.jade
+      include ./includes/votacionScripts.jade
+        

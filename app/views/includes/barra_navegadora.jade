@@ -1,0 +1,17 @@
+nav#barra-navegadora.navbar.navbar-default(role="navigation")
+  div.container
+    div.navbar-header.page-scroll
+      button.navbar-toggle(type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
+        each val in [1,2,3,4]
+          case val
+            when 1
+              span.sr-only Toggle navigation
+            default
+              span.icon-bar
+      a.navbar-brand(href="/") Bienal Arte Joven
+    div#bs-example-navbar-collapse-1.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        each val in ["Inicio","Agenda","Galería","Información","Contacto"]
+          - var aux = val.toLowerCase().replace('í','i').replace('ó','o');
+          li 
+            a.page-scroll(href="#{'#'+aux}")=val

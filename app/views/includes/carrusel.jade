@@ -1,0 +1,33 @@
+section.row
+  div.box.col-md-10.col-sm-12.col-md-offset-1.text-center
+    div#carousel-example-generic.carousel.slide
+      ol.carousel-indicators.hidden-xs
+        each val in [0,1,2,3,4]
+          case val
+            when 0
+              li.active(data-target="#carousel-example-generic" data-slide-to="#{val}")
+            default
+              li(data-target="#carousel-example-generic" data-slide-to="#{val}")
+
+      div.carousel-inner
+        each val in [1,2,3,4,5]
+          case val
+            when 1
+              div.item.active
+                img.img-responsive.img-full(src="img/slide-#{val}.png")/
+            default
+              div.item
+                img.img-responsive.img-full(src="img/slide-#{val}.png")/
+              
+
+      a.left.carousel-control(href="#carousel-example-generic" data-slide="prev")
+        span.icon-prev
+      a.right.carousel-control(href="#carousel-example-generic" data-slide="next")
+        span.icon-next
+    h2.brand-before
+      small Bienvenidos a
+    h1.brand-name Bienal de Arte Joven
+    hr.tagline-divider
+    h2
+      small Por 
+        strong Rectorado UNL Santa Fe

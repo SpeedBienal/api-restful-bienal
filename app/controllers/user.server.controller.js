@@ -104,6 +104,10 @@ exports.renderSignUp = function ( req, res, next ) {
   }
 };
 
+exports.renderHome = function ( req, res ) {
+  res.render( 'inicio' );
+}
+
 exports.create = function ( req, res, next ) {
   var user = new User( req.body );
   user.save(function ( err ) {

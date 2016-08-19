@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    include ./includes/estilos.jade
+    title 12º Bienal de Arte Joven
+  
+  body#inicio
+    
+    include ./includes/cabecera.jade
+    include ./includes/barra_navegadora.jade
+    
+    div#contenido.container
+      include ./includes/carrusel.jade
+      include ./includes/agenda.jade
+      include ./includes/galeria.jade
+      include ./includes/contacto.jade
+    nav.navbar.navbar-fixed-bottom
+      div.container
+        a.btn.btn-lg.btn-success.navbar-btn.navbar-right(href="http://localhost:3000/votacion",style="margin-right: 0.5em;") Ver Votación
+    include ./includes/footer.jade
+    script(src="./js/bundle.js")
+    script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');
+    script(async,defer,src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7YGS5YL3Sits9Tsx3PPpI5H3S3s-SY_A&callback=initMap")
