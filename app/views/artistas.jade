@@ -6,12 +6,9 @@ html
   body(ng-app="Artista" ng-controller="ArtistaController")
     include ./includes/cabecera.jade
     div.container.box
-    
-      each val, index in messages
-        div.alert.alert-danger(role="alert")= val
-        
+      div.alert.alert-info(role="alert") Estas agregando artistas
       div.col-xs-offset-3.col-xs-6
-        form(method="post", action="/signup")
+        form(method="post", action="")
           div.form-group
             label Nombre:
             input.form-control(type="text", name="nombre", ng-model="nombre")
@@ -24,6 +21,6 @@ html
             label DNI:
             input.form-control(type="text", name="dni", ng-model="dni")
             hr
-            button.btn.btn-info(type="submit", name="guardar") Guardar 
+            button.btn.btn-info(type="button", name="guardar" ng-click="") Guardar 
               i.fa.fa-pencil-square-o.fa-lg
     include ./includes/sign_out.jade

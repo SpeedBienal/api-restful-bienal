@@ -7,8 +7,7 @@ html
     include ./includes/cabecera.jade
     div.container.box
     
-      each val, index in messages
-        div.alert.alert-danger(role="alert")= val
+      div.alert.alert-info(role="alert") Estas agregando obras
         
       div.col-xs-offset-3.col-xs-6
         form(method="post", action="/signup")

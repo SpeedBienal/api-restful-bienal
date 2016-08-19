@@ -16,6 +16,8 @@ module.exports = function( app ) {
   app.route( '/api/v1/obras/backup/json' )
     .get( obra.pretty_list );
 
+  app.get( '/obras', obra.renderObra );
+  
   app.param( 'obraId', obra.obraByID );
   app.param( 'categoria', obra.obraByCategoria );
 };

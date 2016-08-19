@@ -1,4 +1,5 @@
 var artista = require('../controllers/artista.server.controller');
+var user = require('../controllers/user.server.controller');
 
 module.exports = function( app ) {
   app.route( '/api/v1/artistas' )
@@ -14,6 +15,8 @@ module.exports = function( app ) {
     .get( artista.read )
     .put( user.requireLogin, artista.update )
     .delete( user.requireLogin, artista.delete );
+
+  app.get( '/artistas', artista.renderArtista );
 
   app.param( 'artista_id', artista.artistaByID );
   app.param( 'artista_dni', artista.artistaByDni );

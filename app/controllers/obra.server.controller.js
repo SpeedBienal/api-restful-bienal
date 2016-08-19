@@ -121,3 +121,7 @@ exports.pretty_list = function (req, res) {
     }
   });
 };
+
+exports.renderObra = function ( req, res ) {
+  res.render('obras');
+};

@@ -45,7 +45,7 @@ exports.delete = function (req, res, next) {
   });
 };
 
-exports.artistaById = function (req, res, next, artista_id) {
+exports.artistaByID = function (req, res, next, artista_id) {
   Persona.findOne({ _id: artista_id }, function (err, artista) {
     if (err) {
       return next(err);
@@ -65,4 +65,8 @@ exports.artistaByDni = function (req, res, next, artista_dni) {
       next();
     }
   });
+};
+
+exports.renderArtista = function ( req, res ) {
+  res.render( 'artistas' );
 };

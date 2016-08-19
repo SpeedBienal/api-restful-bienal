@@ -32,6 +32,8 @@ module.exports = function( app ) {
     .get( users.renderSignUp )
     .post( users.signUp );
 
+  app.get( '/dashboard', users.renderDashboard );
+
   app.param( 'userId', users.userById );
   app.param( 'username', users.userByUsername );
 };

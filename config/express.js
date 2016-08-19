@@ -57,6 +57,7 @@ module.exports = function( db ) {
   //Require a las rutas
   require( '../app/routes/user.server.route.js' )( app );
   require( '../app/routes/voto.server.route.js' )( app );//, server, io );
+  require( '../app/routes/artista.server.route.js' )( app );
   require( '../app/routes/persona.server.route.js' )( app );
   require( '../app/routes/obras.server.route.js' )( app );
 

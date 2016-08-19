@@ -108,6 +108,10 @@ exports.renderHome = function ( req, res ) {
   res.render( 'inicio' );
 }
 
+exports.renderDashboard = function ( req, res ) {
+  res.render( 'dashboard', {usuario: req.user} );
+}
+
 exports.create = function ( req, res, next ) {
   var user = new User( req.body );
   user.save(function ( err ) {
