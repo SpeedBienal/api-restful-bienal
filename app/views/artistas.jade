@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    include ./includes/estilos.jade
+    title Carga de artistas
+  body(ng-app="Artista" ng-controller="ArtistaController")
+    include ./includes/cabecera.jade
+    div.container.box
+    
+      each val, index in messages
+        div.alert.alert-danger(role="alert")= val
+        
+      div.col-xs-offset-3.col-xs-6
+        form(method="post", action="/signup")
+          div.form-group
+            label Nombre:
+            input.form-control(type="text", name="nombre", ng-model="nombre")
+            label Apellido:
+            input.form-control(type="text", name="apellido", ng-model="apellido")
+            label Pseudonimo:
+            input.form-control(type="text", name="pseudonimo", ng-model="pseudonimo")
+            label Email:
+            input.form-control(type="text", name="email", ng-model="email")
+            label DNI:
+            input.form-control(type="text", name="dni", ng-model="dni")
+            hr
+            button.btn.btn-info(type="submit", name="guardar") Guardar 
+              i.fa.fa-pencil-square-o.fa-lg
+    include ./includes/sign_out.jade

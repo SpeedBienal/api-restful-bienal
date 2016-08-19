@@ -2,32 +2,31 @@ var users = require('../../app/controllers/user.server.controller.js');
 var passport = require('passport');
 
 module.exports = function( app ) {
-  app.route( '/users' )
+  app.route( '/api/v1/users' )
     .post( users.create )
     .get( users.list );
 
-  app.route( '/users/username/:username' )
+  app.route( '/api/v1/users/username/:username' )
     .get( users.read )
     .put( users.requireLogin, users.isOwnerUsername, users.update )
     .delete( users.requireLogin, users.isOwnerUsername, users.delete );
 
-  app.route( '/users/:userId' )
+  app.route( '/api/v1/users/:userId' )
     .get( users.read )
     .put( users.requireLogin, users.isOwnerId, users.update )
     .delete( users.requireLogin, users.isOwnerId, users.delete );
 
-  app.route( '/' )
-    .get( users.renderHome );
+  app.get( '/' , users.renderHome );
+
+  app.get( '/salir', users.signOut );
 
   app.route( '/ingreso' )
     .get( users.renderSignIn )
     .post( passport.authenticate('local', {
       successRedirect: '/dashboard',
-      failureRedirect: '/signin',
+      failureRedirect: '/ingreso',
       failureFlash: true
       }));
-
-  app.get( '/signout', users.signOut );
 
   app.route( '/registro' )
     .get( users.renderSignUp )

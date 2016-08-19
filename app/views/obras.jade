@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    include ./includes/estilos.jade
+    title Carga de obras
+  body
+    include ./includes/cabecera.jade
+    div.container.box
+    
+      each val, index in messages
+        div.alert.alert-danger(role="alert")= val
+        
+      div.col-xs-offset-3.col-xs-6
+        form(method="post", action="/signup")
+          div.form-group
+            label Título:
+            input.form-control(type="text", name="titulo")
+            label Técnica:
+            input.form-control(type="text", name="tecnica")
+            label Autor:
+            input.form-control(type="text", name="autor")
+            label Categoría:
+            input.form-control(type="text", name="categoria")
+            label Clase:
+            input.form-control(type="password", name="clase")
+            hr
+            button.btn.btn-info(type="submit", name="guardar") Guardar 
+              i.fa.fa-pencil-square-o.fa-lg
+    include ./includes/sign_out.jade

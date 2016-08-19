@@ -4,8 +4,7 @@ html
     include ./includes/estilos.jade
     title= title
   body
-    div.brand Bienal Arte Joven
-    div.address-bar Rectorado, UNL, siempre cerca de tu corazón
+    include ./includes/cabecera.jade
     div.container.box
     
       each val, index in messages
@@ -14,9 +13,9 @@ html
       div.col-xs-offset-3.col-xs-6
         form(method="post", action="/signup")
           div.form-group
-            label First Name:
+            label Nombre:
             input.form-control(type="text", name="firstName")
-            label Last Name:
+            label Apellido:
             input.form-control(type="text", name="lastName")
             label Email:
             input.form-control(type="text", name="email")
@@ -25,4 +24,6 @@ html
             label Password:
             input.form-control(type="password", name="password")
             hr
-            button.btn.btn-info(type="submit", name="Sign up") Registrarse
+            button.btn.btn-info(type="submit", name="Sign up") Registrarse 
+              i.fa.fa-pencil-square-o.fa-lg
+    include ./includes/sign_out.jade

@@ -79,7 +79,7 @@ exports.signUp = function ( req, res, next ) {
 
 exports.signOut = function ( req, res ) {
   req.logout();
-  res.redirect( '/' );
+  res.redirect( '/ingreso' );
 };
 
 exports.renderSignIn = function ( req, res, next ) {
@@ -89,7 +89,7 @@ exports.renderSignIn = function ( req, res, next ) {
       messages: req.flash('error') || req.flash('info')
     });
   } else {
-    return res.redirect( '/' );
+    return res.redirect( '/dashboard' );
   }
 };
 
