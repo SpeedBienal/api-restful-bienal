@@ -94,13 +94,13 @@ exports.renderSignIn = function ( req, res, next ) {
 };
 
 exports.renderSignUp = function ( req, res, next ) {
-  if ( !req.user ) {
+  if ( req.user ) {
     res.render( 'signup', {
       title: 'Formulario de registro',
       messages: req.flash( 'error' )
     });
   } else {
-    return res.redirect( '/' );
+    return res.redirect( '/ingreso' );
   }
 };
 

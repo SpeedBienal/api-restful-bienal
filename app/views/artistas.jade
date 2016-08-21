@@ -3,7 +3,7 @@ html
   head
     include ./includes/estilos.jade
     title Carga de artistas
-  body(ng-app="Artista" ng-controller="ArtistaController")
+  body(ng-app="artista", ng-controller="ArtistasController")
     include ./includes/cabecera.jade
     div.container.box
       div.alert.alert-info(role="alert") Estas agregando artistas
@@ -14,13 +14,17 @@ html
             input.form-control(type="text", name="nombre", ng-model="nombre")
             label Apellido:
             input.form-control(type="text", name="apellido", ng-model="apellido")
-            label Pseudonimo:
+            label Pseudónimo:
             input.form-control(type="text", name="pseudonimo", ng-model="pseudonimo")
             label Email:
             input.form-control(type="text", name="email", ng-model="email")
             label DNI:
             input.form-control(type="text", name="dni", ng-model="dni")
             hr
-            button.btn.btn-info(type="button", name="guardar" ng-click="") Guardar 
+            button.btn.btn-info(type="button", name="guardar" ng-click="sendData()") Guardar 
               i.fa.fa-pencil-square-o.fa-lg
     include ./includes/sign_out.jade
+    script(src="./lib/jquery/dist/jquery.min.js")
+    script(src="./lib/bootstrap/dist/js/bootstrap.min.js")
+    script(src="./lib/angular/angular.js")
+    script(src="./js/controllers/ArtistasController.js")

@@ -3,7 +3,7 @@ var passport = require('passport');
 
 module.exports = function( app ) {
   app.route( '/api/v1/users' )
-    .post( users.create )
+    .post( users.requireLogin, users.create )
     .get( users.list );
 
   app.route( '/api/v1/users/username/:username' )
@@ -29,10 +29,11 @@ module.exports = function( app ) {
       }));
 
   app.route( '/registro' )
-    .get( users.renderSignUp )
-    .post( users.signUp );
+    .get( users.requireLogin, users.renderSignUp )
+    .post( users.requireLogin, users.signUp );
 
-  app.get( '/dashboard', users.renderDashboard );
+  app.route( '/dashboard' )
+  .get( users.requireLogin, users.renderDashboard );
 
   app.param( 'userId', users.userById );
   app.param( 'username', users.userByUsername );
