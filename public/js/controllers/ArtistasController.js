@@ -22,7 +22,26 @@
     $scope.dni = "";
 
     $scope.sendData = function () {
+      //no se asuste mijo, javascript vanilla mas adelante
       var obj = new Artista($scope.nombre, $scope.apellido, $scope.pseudonimo, $scope.email, $scope.dni);
+      //contenedor de mis alerts
+      var contenedor = document.querySelector('#divs-de-alerta');
+      //creo variables para cada node que voy a pushear
+      var push_alert = document.createElement("div");
+      var push_button = document.createElement("button");
+      var push_span = document.createElement("span");
+      var push_p = document.createElement("p");
+
+      //les defino sus atributos
+      push_alert.setAttribute("role","alert");
+      push_alert.className += "alert alert-dismissible fade in";
+      push_button.setAttribute("type","button");
+      push_button.setAttribute("data-dismiss","alert");
+      push_button.setAttribute("class","close");
+      push_button.setAttribute("aria-label","Close");
+      push_span.setAttribute("aria-hidden","true");
+      push_span.innerHtml = "×";
+      //pero a <p> todavia no le asigno nada adentro
       artistasService.createNew( obj ).then(function (res) {
         //el todo bien Promise
         $scope.nombre = "";
@@ -30,10 +49,27 @@
         $scope.pseudonimo = "";
         $scope.email = "";
         $scope.dni = "";
-        //$('div.alert.alert-info').after('<div class="alert alert-success alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><p>Artista creado correctamente</p></div>');
+
+        //aca agrego el tipo de alert success/danger
+        push_alert.className += " alert-success";
+        //empiezo a agregar los nodos
+        push_button.appendChild(push_span);
+        push_alert.appendChild(push_button);
+        push_p.innerHtml = "Artista agregado correctamente";
+        push_alert.appendChild(push_p);
+        contenedor.appendChild(push_alert);
+
       }, function (res) {
         //el todo mal Promise
-        //$('div.alert.alert-info').after('<div class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <h4>Oh snap!</h4> <p>Algo pasó! No se pudo agregar el artista</p></div>')
+
+        push_alert.className += " alert-danger";
+        var push_h4 = document.createElement("h4").innerHtml = "Oh snap!"
+        push_button.appendChild(push_span);
+        push_alert.appendChild(push_button);
+        push_alert.appendChild(push_h4);
+        push_p.innerHtml = " Algo pasó! No se pudo agregar el artista";
+        push_alert.appendChild(push_p);
+        contenedor.appendChild(push_alert);
         console.log(res);
       });
     }

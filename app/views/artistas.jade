@@ -6,7 +6,8 @@ html
   body(ng-app="artista", ng-controller="ArtistasController")
     include ./includes/cabecera.jade
     div.container.box
-      div.alert.alert-info(role="alert") Estas agregando artistas
+      div#divs-de-alerta
+        div.alert.alert-info(role="alert") Estas agregando artistas
       div.col-xs-offset-3.col-xs-6
         form(method="post", action="")
           div.form-group
