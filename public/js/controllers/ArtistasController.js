@@ -53,11 +53,12 @@
         //aca agrego el tipo de alert success/danger
         push_alert.className += " alert-success";
         //empiezo a agregar los nodos
+        contenedor.appendChild(push_alert);
         push_button.appendChild(push_span);
         push_alert.appendChild(push_button);
         push_p.innerHtml = "Artista agregado correctamente";
         push_alert.appendChild(push_p);
-        contenedor.appendChild(push_alert);
+
 
       }, function (res) {
         //el todo mal Promise
@@ -72,7 +73,7 @@
         contenedor.appendChild(push_alert);
         console.log(res);
       });
-    }
+    };
   }
 
   function _artistasService($http) {
