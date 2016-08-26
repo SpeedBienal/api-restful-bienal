@@ -3,14 +3,13 @@ html
   head
     include ./includes/estilos.jade
     title Carga de obras
-  body(ng-app="obras", ng-controller="ObrasController")
+  body(ng-app="remoto", ng-controller="ObrasController")
     include ./includes/cabecera.jade
     div.container.box
-
-      div.alert.alert-info(role="alert") Estas agregando obras
-
+      div#divs-de-alerta
+        div.alert.alert-info(role="alert") Estas agregando obras
       div.col-xs-offset-3.col-xs-6
-        form(method="post", action="/signup")
+        form(method="post")
           div.form-group
             label Título:
             input.form-control(type="text", ng-model="titulo")
@@ -19,7 +18,7 @@ html
             label Autor:
             select.form-control(ng-model="autor")
               option(value="") Seleccione un autor
-              option(ng-repeat="a in autores", value="{{a.id}}") {{a.nombre}}
+              option(ng-repeat="a in autores", value="{{a._id}}") {{a.pseudonimo !== "" ? a.pseudonimo : a.apellido+", "+a.nombre}}
             label Campo:
             select.form-control(ng-model="categoria")
               option(value="") Seleccione un campo
@@ -29,9 +28,14 @@ html
               option(value="escenicas") Escénicas
               option(value="letras") Letras
             label Categoría:
-            input.form-control(type="radio", value="A", ng-model="clase") A -
-            input.form-control(type="radio", value="B", ng-model="clase") B
+            select.form-control(ng-model="clase")
+              option(value="") Seleccione una categoría
+              option(value="A") A
+              option(value="B") B
             hr
-            button.btn.btn-info(type="submit", name="guardar") Guardar
+            button.btn.btn-info(type="button", name="guardar", ng-click="sendData()") Guardar
               i.fa.fa-pencil-square-o.fa-lg
     include ./includes/sign_out.jade
+    script(src="./js/bootstrap-bundle.js")
+    script(src="./lib/angular/angular.min.js")
+    script(src="./js/crud-bundle.js")

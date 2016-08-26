@@ -11,7 +11,7 @@ nav#barra-navegadora.navbar.navbar-default(role="navigation")
       a.navbar-brand(href="/") Bienal Arte Joven
     div#bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
-        each val in ["Inicio","Agenda","Galería","Información","Contacto"]
-          - var aux = val.toLowerCase().replace('í','i').replace('ó','o');
+        each val in ["Inicio","Agenda","+ Bienal","Información","Contacto"]
+          - var aux = val.toLowerCase().replace('ó','o').replace('+ ','mas-');
           li 
             a.page-scroll(href="#{'#'+aux}")=val

@@ -3,7 +3,7 @@ html
   head
     include ./includes/estilos.jade
     title Carga de artistas
-  body(ng-app="artista", ng-controller="ArtistasController")
+  body(ng-app="remoto", ng-controller="ArtistasController")
     include ./includes/cabecera.jade
     div.container.box
       div#divs-de-alerta
@@ -22,10 +22,9 @@ html
             label DNI:
             input.form-control(type="text", name="dni", ng-model="dni")
             hr
-            button.btn.btn-info(type="button", name="guardar" ng-click="sendData()") Guardar 
+            button.btn.btn-info(type="button", name="guardar", ng-click="sendData()") Guardar 
               i.fa.fa-pencil-square-o.fa-lg
     include ./includes/sign_out.jade
-    script(src="./lib/jquery/dist/jquery.min.js")
-    script(src="./lib/bootstrap/dist/js/bootstrap.min.js")
-    script(src="./lib/angular/angular.js")
-    script(src="./js/controllers/ArtistasController.js")
+    script(src="./js/bootstrap-bundle.js")
+    script(src="./lib/angular/angular.min.js")
+    script(src="./js/crud-bundle.js")

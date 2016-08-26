@@ -1,17 +1,19 @@
 doctype html
 html
-  head
-    include ./includes/estilos.jade
-    title Dashboard
-  body
-    include ./includes/cabecera.jade
-    div.container.box
-      div.alert.alert-info(role="alert") Sesión iniciada como #{usuario.username}
-      div.row
-        a.btn.btn-default.col-xs-offset-1.col-xs-2(href="/registro") Crear nuevo usuario 
-          i.fa.fa-user-plus.fa-lg
-        a.btn.btn-default.col-xs-offset-2.col-xs-2(href="/artistas") Agregar artistas 
-          i.fa.fa-paint-brush.fa-lg
-        a.btn.btn-default.col-xs-offset-2.col-xs-2(href="/obras") Agregar obras 
-          i.fa.fa-picture-o.fa-lg
-    include ./includes/sign_out.jade
+	head
+		include ./includes/estilos.jade
+		title Dashboard
+	body
+		include ./includes/cabecera.jade
+		div.container.box
+			div.alert.alert-info(role="alert") Sesión iniciada como #{usuario.username}
+			div.row
+				a.btn.btn-default.col-xs-offset-1.col-xs-2(href="/registro") Crear nuevo usuario 
+					i.fa.fa-user-plus.fa-lg
+				a.btn.btn-default.col-xs-offset-2.col-xs-2(href="/artistas") Agregar artistas 
+					i.fa.fa-paint-brush.fa-lg
+				a.btn.btn-default.col-xs-offset-2.col-xs-2(href="/obras") Agregar obras 
+					i.fa.fa-picture-o.fa-lg
+		div.row
+			a.btn.btn-default.col-xs-offset-1.col-xs-2(href="/dashboard/developer") Notas de desarrollo
+		include ./includes/sign_out.jade

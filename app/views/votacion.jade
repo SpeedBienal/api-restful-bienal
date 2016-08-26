@@ -3,7 +3,7 @@ html
   head
     include ./includes/estilos.jade
     title Resultados parciales en tiempo real
-  body(ng-app="votacion", ng-controller="VotacionController" ng-cloak)
+  body(ng-app="votacion", ng-controller="VotacionController", ng-cloak)
     include ./includes/cabecera.jade
     div.container.box
       div.row
@@ -34,7 +34,9 @@ html
               p {{#{aux}.labels[2]}} {{#{aux}.data[2]}}
       nav.navbar.navbar-fixed-bottom
         div.container-fluid
-          a.btn.btn-lg.btn-success.navbar-btn(href="http://localhost:3000/", style="margin-left: 0.5em;") Volver al Inicio
+          a.btn.btn-lg.btn-success.navbar-btn(href="./", style="margin-left: 0.5em;") Volver al Inicio
       include ./includes/footer.jade
-      include ./includes/votacionScripts.jade
+      script(src="/socket.io/socket.io.js")
+      script(src="./lib/angular/angular.min.js")
+      script(src="./js/votacion-bundle.js")
         

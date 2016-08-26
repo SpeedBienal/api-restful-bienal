@@ -35,6 +35,9 @@ module.exports = function( app ) {
   app.route( '/dashboard' )
   .get( users.requireLogin, users.renderDashboard );
 
+	app.route( '/dashboard/developer' )
+	.get( users.requireLogin, users.renderDeveloperNotes );
+
   app.param( 'userId', users.userById );
   app.param( 'username', users.userByUsername );
 };
