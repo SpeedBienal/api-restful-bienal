@@ -1,0 +1,24 @@
+div.col-md-10.col-sm-12.col-md-offset-1.text-center
+  div#carousel-audiovisuales.carousel.slide
+    ol.carousel-indicators
+      each val in [0,1,2,3,4,5,6,]
+        case val
+          when 0
+            li.active(data-target="#carousel-audiovisuales" data-slide-to="#{val}")
+          default
+            li(data-target="#carousel-audiovisuales" data-slide-to="#{val}")
+
+    div.carousel-inner
+      each val in [1,2,3,4,5,6,7]
+        case val
+          when 1
+            div.item.active
+              img.img-responsive.img-full(src="img/programa/audiovisuales/#{val}.png")/
+          default
+            div.item
+              img.img-responsive.img-full(src="img/programa/audiovisuales/#{val}.png")/
+
+    a.left.carousel-control(href="#carousel-audiovisuales" data-slide="prev")
+      span.icon-prev
+    a.right.carousel-control(href="#carousel-audiovisuales" data-slide="next")
+      span.icon-next
