@@ -1,15 +1,15 @@
 div.col-md-10.col-sm-12.col-md-offset-1.text-center
   div#carousel-visuales.carousel.slide
     ol.carousel-indicators
-      each val in [0,1,2,3,4,5,6,]
+      each val in [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
         case val
-          when 0
+          when 1
             li.active(data-target="#carousel-visuales" data-slide-to="#{val}")
           default
             li(data-target="#carousel-visuales" data-slide-to="#{val}")
 
     div.carousel-inner
-      each val in [1,2,3,4,5,6,7]
+      each val in [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
         case val
           when 1
             div.item.active

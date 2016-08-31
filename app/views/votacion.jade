@@ -13,8 +13,8 @@ html
           h4 Audiovisuales
           canvas#av-chart.chart.chart-pie(chart-data="#{aux}.data",chart-labels="#{aux}.labels",chart-colors="#{aux}.colors")
           .text-justify
-            p
-              strong Total de votos
+            p.
+              #[strong Total de votos]
               {{ #{aux}.data[0]+#{aux}.data[1]+#{aux}.data[2]+#{aux}.data[3] }}
             p {{#{aux}.labels[0]}} {{#{aux}.data[0]}}
             p {{#{aux}.labels[1]}} {{#{aux}.data[1]}}
@@ -26,8 +26,8 @@ html
             h4= val
             canvas#av-chart.chart.chart-pie(chart-data="#{aux}.data",chart-labels="#{aux}.labels",chart-colors="#{aux}.colors")
             .text-justify
-              p
-                strong Total de votos
+              p.
+                #[strong Total de votos]
                 {{ #{aux}.data[0]+#{aux}.data[1]+#{aux}.data[2]+#{aux}.data[3] }}
               p {{#{aux}.labels[0]}} {{#{aux}.data[0]}}
               p {{#{aux}.labels[1]}} {{#{aux}.data[1]}}

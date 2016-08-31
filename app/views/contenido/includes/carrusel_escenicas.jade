@@ -1,7 +1,7 @@
 div.col-md-10.col-sm-12.col-md-offset-1.text-center
   div#carousel-escenicas.carousel.slide
     ol.carousel-indicators
-      each val in [0,1,2,3,4,5,6,]
+      each val in [0,1,2,3,4,5]
         case val
           when 0
             li.active(data-target="#carousel-escenicas" data-slide-to="#{val}")
@@ -9,7 +9,7 @@ div.col-md-10.col-sm-12.col-md-offset-1.text-center
             li(data-target="#carousel-escenicas" data-slide-to="#{val}")
 
     div.carousel-inner
-      each val in [1,2,3,4,5,6,7]
+      each val in [1,2,3,4,5,6]
         case val
           when 1
             div.item.active
