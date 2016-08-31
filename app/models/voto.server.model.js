@@ -38,6 +38,16 @@ VotoSchema.statics.findByCategoria = function (categoria, callback) {
 
 VotoSchema.statics.top3ByCategoria = _top_3;
 
+VotoSchema.statics.total_top = function (categoria, callback) {
+  this.aggregate([
+    { $match: { categoria: categoria } },
+    { $group: { _id:"$obra", suma: { $sum: 1 } } },
+    { $sort: { suma: -1 } }])
+    .exec(function (err, datos) {
+      //populate de datos
+      Obra.populate(datos, {path: '_id titulo categoria'}, callback);
+    });
+}
 
 VotoSchema.statics.totalCategoria = function (categoria, callback) {
   this.count({"categoria": categoria}, callback);

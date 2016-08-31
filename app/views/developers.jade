@@ -1,16 +1,22 @@
 doctype html
 html
 	head
-		include ./includes/estilos.jade
-		link(src="./includes/video_style.css")
+		meta(charset="utf-8")/
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")/
+		meta(name="viewport", content="width=device-width, initial-scale=1")/
+		meta(name="description", content="")/
+		meta(name="author", content="Malows")/
+		link(rel="shortcut icon", type="image/ico", href="img/favicon.ico")/
+		link(rel="stylesheet", href="../css/stylesheet.css")/
+
 		title Notas para el desarrollador
 	body		
-		div.col-md-8.col-md-offset-2.col-xs-12.containter
+		div.col-md-8.col-md-offset-2.col-xs-12.containter.box
 			p.
 				Esta es la primer version de la API para la bienal de arte joven, esperamos que este primer esfuerzo sirva como piedra angular para futuros desarrollos
 				Como desarrollador de esta api y ser parte del grupo que inova en estos campos para la Bienal de Arte Joven, me tomé la libertad de bautizar la versión 1 como "Master Exploder"
-			div.videoWrapper			
-				iframe(width="420", height="315", src="https://www.youtube.com/embed/80DtQD5BQ_A", frameborder="0", allowfullscreen=true)
+			div.responsive-iframe			
+				iframe(src="https://www.youtube.com/embed/80DtQD5BQ_A", frameborder="0", allowfullscreen=true)
 			hr
 			h1 Como funciona la API
 			hr
@@ -51,7 +57,7 @@ html
 			p.
 				Endpoint que se encarga de manejar los Artistas de la Bienal, el verbo GET puede ser utilizado libremente pero los otros verbos requieren un login de usuarios desde el dashboard del sistema, no fueron pensadas para que la aplicación móvil trate estos endpoint, porque los datos estan precargados en la aplicación, el espacio es barato, la disponibilidad de conectividad es incierta y la experiencia de usuario siempre vale más
 			p.
-				#[strong Atajos: ] `/api/v1/votacion` y `/api/v1/votacion/:categoria_voto` El atajo sin categoría devuelve una lista con los tops 3 de cada categoría y un total de votos, mientras que el atajo con categoría es solo el top 3 y total de votos de una sola categoría
+				#[strong Atajos: ] `/api/v1/votacion` y `/api/v1/votacion/:categoria_voto` El atajo sin categoría devuelve una lista con los tops 3 de cada categoría y un total de votos, mientras que el atajo con categoría el total de votos de una sola categoría, para saber quien ganó
 			p	#[strong View público: ] `/votacion` view del resultado real-time de la votación del público
 
 			hr

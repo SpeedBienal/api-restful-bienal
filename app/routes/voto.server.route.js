@@ -11,7 +11,7 @@ module.exports = function ( app ) {
     .get( voto.renderVotacion );
 
   app.route( '/api/v1/votacion/:categoria_voto' )
-    .get( voto.single_top );
+    .get( voto.total_top );
 
   app.param( 'categoria_voto', voto.single_top );
 };

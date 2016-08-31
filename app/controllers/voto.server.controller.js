@@ -68,6 +68,16 @@ exports.single_top = function (req, res, next, categoria) {
   });
 };
 
+exports.total_top = function (req, res, next, categoria) {
+  Voto.total_top( categoria, function ( err, resultado ) {
+    if ( err ) {
+      return next(err);
+    } else {
+      res.json( resultado );
+    }
+  });
+};
+
 exports.top = function () {
   Voto.top3ByCategoria('audiovisuales', function (err, av_votos) {
     if (err) {
@@ -103,6 +113,8 @@ exports.top = function () {
         }});
     }});
 };
+
+
 
 exports.create = function (req, res, next) {
   var voto = new Voto( req.voto );

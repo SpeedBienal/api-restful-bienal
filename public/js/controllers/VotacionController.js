@@ -5,32 +5,31 @@
 
   function _votacion ($scope, socket, votacionService) {
     $scope.visuales ={
-      'data': [1,1,1,1],
+      'data': [0,0,0,0],
       'labels': ['uno', 'dos', 'tres', 'otros'],
       'colors': ['#395E80',Lighten('#395E80',30),Lighten('#395E80',60),Lighten('#395E80',90)]
     };
     $scope.audiovisuales = {
-      'data': [1,1,1,1],
+      'data': [0,0,0,0],
       'labels': ['uno', 'dos', 'tres', 'otros'],
       'colors': ['#ed7635',Lighten('#ed7635',30),Lighten('#ed7635',60),Lighten('#ed7635',90)]
     };
     $scope.musica = {
-      'data': [1,1,1,1],
+      'data': [0,0,0,0],
       'labels': ['uno', 'dos', 'tres', 'otros'],
       'colors': ['#f8b451',Lighten('#f8b451',30),Lighten('#f8b451',60), Lighten('#f8b451',90)]
     };
     $scope.escenicas = {
-      'data': [1,1,1,1],
+      'data': [0,0,0,0],
       'labels': ['uno', 'dos', 'tres', 'otros'],
       'colors': ['#ea5a57',Lighten('#ea5a57',30),Lighten('#ea5a57',60), Lighten('#ea5a57',90)]
     };
     $scope.letras = {
-      'data': [1,1,1,1],
+      'data': [0,0,0,0],
       'labels': ['uno', 'dos', 'tres', 'otros'],
       'colors': ['#00a880',Lighten('#00a880',30),Lighten('#00a880',60), Lighten('#00a880',90)]
     };
 
-/* ESTO MIENTRAS NO TENGO DATOS
     socket.on('voto', function (data) {
       votacionService.getInitial().then(function (res) {
 
@@ -73,14 +72,13 @@
         console.log(res.data);
       });
 
-
     });
 
     $scope.$on('$destroy', function() {
         socket.removeListener('voto');
     });
 
-    */
+
   }
 
   function Lighten(col, amt) {
