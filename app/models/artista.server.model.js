@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const helpers = require('../helpers');
 
 var ArtistaSchema = new mongoose.Schema({
   pseudonimo: {
@@ -16,18 +17,13 @@ var ArtistaSchema = new mongoose.Schema({
     type: Number,
     unique: true,
     required: true,
-    set: function (entrada) {
-      entrada = entrada.toString();
-      entrada = entrada.replace(/[,.\s]+/g, "").trim();
-      return parseInt(entrada);
-    },
+    set: helpers.parseDNI,
   },
   email: {
    type: String,
    unique: true,
-   required: true,
-   match: [ /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/igm, 'Fill me with a valid E-Mail adress plizchu!' ]
- },
+   required: true
+ }
 });
 
 mongoose.model('Artista', ArtistaSchema);

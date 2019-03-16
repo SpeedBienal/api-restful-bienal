@@ -1,127 +1,43 @@
-var Obra = require('mongoose').model('Obra');
+const Obra = require('mongoose').model('Obra')
+const helpers = require('../helpers');
+const responser = helpers.responser;
+const passer = helpers.passer;
 
-var getErrorMessage = function ( err ) {
-  if ( err.errors ) {
-    for ( var errName in err.errors ) {
-      if ( err.errors[ errName ].message )
-        return err.errors[ errName ].message;
-    }
-  } else {
-    return 'Unknown server error, pal'
-  }
-};
+exports.list = (req, res) => {
+  Obra.find().sort('-created').lean().exec(responser(res))
+}
 
-exports.list = function (req, res) {
-  Obra.find()
-  .sort('-created')
-  .exec(function (err, obras) {
-    if (err) {
-      return res.status(400).send( { message: getErrorMessage( err ) } );
-    } else {
-      res.json(obras);
-    }
-  });
-};
+exports.create = (req, res) => {
+  const obra = new Obra(req.body)
+  obra.save(responser(res))
+}
 
-exports.create = function (req, res) {
-var obra = new Obra(req.body);
+exports.read = (req, res) => { res.json(req.obra) }
 
-obra.save(function (err) {
-  if (err) {
-    return res.status(400).send( { message: getErrorMessage( err ) } );
-  } else {
-    res.json(obra);
-  }
-});
-};
+exports.update = (req, res) => {
+  Obra.findByIdAndUpdate(req.obra._id, req.body, responser(res))
+}
 
-exports.read = function (req, res) {
-  res.json( req.obra );
-};
+exports.delete = (req, res) => { req.obra.remove(responser(res)) }
 
-exports.update = function (req, res) {
-  var obra = req.obra;
-  obra.titulo = req.body.titulo;
-  obra.autor = req.body.autor;
-  obra.categoria = req.body.categoria;
-  obra.save(function (err) {
-    if (err) {
-      return res.status(400).send( { message: getErrorMessage( err ) } );
-    } else {
-      res.json(obra);
-    }
-  });
-};
+exports.obraByID = (req, res, next, id) => {
+  Obra.findById(id, passer(req, 'obra', next))
+}
 
-exports.delete = function (req, res) {
-  var obra = req.obra;
-  obra.remove(function (err) {
-    if (err) {
-      return res.status(400).send( { message: getErrorMessage( err ) } );
-    } else {
-      res.json(obra);
-    }
-  });
-};
+exports.obraByAutor = (req, res, next, autor) => {
+ Obra.findByAutor(autor, passer(req, 'obra', next))
+}
 
-exports.obraByID = function (req, res, next, id) {
-  Obra.findOne( {_id: id}, function (err, obra) {
-    if ( err ) {
-      return next( err );
-    } else {
-      req.obra = obra;
-      next();
-    }
-  });
-};
+exports.obraByCategoria = (req, res, next, categoria) => {
+  Obra.findByCategoria(categoria, passer(req, 'obra', next))
+}
 
+exports.obraByFiltro = (req, res, next, filtro) => {
+  Obra.findByFiltro(filtro, passer(req, 'obra', next))
+}
 
-exports.obraByAutor = function (req, res, next, autor) {
- Obra.findByAutor( autor, function (err, obras) {
-   if (err) {
-     return next(err);
-   } else if ( obras.length === 0 || !obras ) {
-     return next( new Error("No se encontraron obras de " + autor));
-   } else {
-     req.obra = obras;
-     next();
- }});
-};
+exports.pretty_list = (req, res) => {
+  Obra.find().select('-_id titulo autor categoria').lean().exec(responser(res))
+}
 
-exports.obraByCategoria = function (req, res, next, categoria) {
-  Obra.findByCategoria( categoria, function (err, obras) {
-    if (err) {
-      return next(err);
-  /*  } else if ( obras.length === 0 || !obras ) {
-      return next( new Error("No se encontraron obras de la categoría " + categoria));
-  */  } else {
-      req.obra = obras;
-      next();
-    }});
-};
-
-exports.obraByFiltro = function (req, res, next, filtro) {
-  Obra.findByFiltro( filtro, function (err, obras) {
-    if (err) {
-      return next(err);
-    } else if ( obras.length === 0 || !obras ) {
-      return next( new Error("No se econtraron coincidencias con '"+ filtro +"'"));
-    } else {
-      req.obra = obras;
-      next();
-  }});
-};
-
-exports.pretty_list = function (req, res) {
-  Obra.find({}, '-_id titulo autor categoria', function(err, obras) {
-    if (err) {
-      return res.status(400).send( { message: getErrorMessage( err ) } );
-    } else {
-      res.json(obras);
-    }
-  });
-};
-
-exports.renderObra = function ( req, res ) {
-  res.render('obras');
-};
+exports.renderObra = (req, res) => { res.render('obras') }

@@ -1,72 +1,31 @@
-var Artista = require('mongoose').model('Artista');
+var Artista = require('mongoose').model('Artista')
+const helpers = require('../helpers');
+const responser = helpers.responser;
+const passer = helpers.passer;
 
-exports.list = function (req, res, next) {
-  Artista.find({}, function (err, artistas) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(artistas);
-    }
-  });
-};
+exports.list = (req, res, next) => {
+  Artista.find().lean().exec(responser(res))
+}
 
-exports.create = function (req, res, next) {
-  var artista = new Artista( req.body );
-  artista.save(function (err) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(artista);
-    }
-  });
-};
+exports.create = (req, res, next) => {
+  var artista = new Artista(req.body)
+  artista.save(responser(res))
+}
 
-exports.read = function (req, res) {
-  res.json( req.artista );
-};
+exports.read = (req, res) => { res.json(req.artista) }
 
-exports.update = function (req, res, next) {
-  Artista.findByIdAndUpdate( req.artista._id, artista.body, function (err, artista) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json( artista );
-    }
-  });
-};
+exports.update = (req, res, next) => {
+  Artista.findByIdAndUpdate(req.artista._id, artista.body, responser(res))
+}
 
-exports.delete = function (req, res, next) {
-  req.artista.remove( function ( err, artista ) {
-    if ( err ) {
-      return next( err );
-    } else {
-      res.json( req.artista );
-    }
-  });
-};
+exports.delete = (req, res, next) => { req.artista.remove(responser(res)) }
 
-exports.artistaByID = function (req, res, next, artista_id) {
-  Persona.findOne({ _id: artista_id }, function (err, artista) {
-    if (err) {
-      return next(err);
-    } else {
-      req.artista = artista;
-      next();
-    }
-  });
-};
+exports.artistaByID = (req, res, next, artista_id) => {
+  Persona.findById(artista_id, passer(req, 'artista', next))
+}
 
-exports.artistaByDni = function (req, res, next, artista_dni) {
-  Persona.findOne( { dni: artista_dni }, function (err, artista) {
-    if (err) {
-      return next(err);
-    } else {
-      req.artista = artista;
-      next();
-    }
-  });
-};
+exports.artistaByDni = (req, res, next, artista_dni) => {
+  Persona.findOne({ dni: artista_dni }, passer(req, 'artista', next))
+}
 
-exports.renderArtista = function ( req, res ) {
-  res.render( 'artistas' );
-};
+exports.renderArtista = (req, res) => { res.render('artistas') }

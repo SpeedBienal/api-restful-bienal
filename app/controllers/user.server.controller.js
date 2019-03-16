@@ -1,7 +1,7 @@
 var User = require('mongoose').model('User');
 var passport = require('passport');
 
-var getErrorMessage = function( err ) {
+var getErrorMessage = err => {
   var message = '';
   if ( err.code ) {
     switch ( err.code ) {
@@ -29,13 +29,11 @@ exports.requireLogin = function ( req, res, next ) {
 };
 
 exports.isOwnerId = function ( req, res, next, id ) {
-  User.findOne( {_id: id }, function (err, user) {
-    if (err) {
-      return next(err);
-    } else {
-      if ( req.user._id !== user._id ) {
+  User.findById(id, (err, user) => {
+    if (err) return next(err);
+    else {
+      if ( req.user._id !== user._id )
         return res.status(401).send({message: 'El usuario no esta autorizado para realizar estas acciones'});
-      }
       next();
     }
   });

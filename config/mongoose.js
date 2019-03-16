@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 module.exports = function () {
   mongoose.Promise = global.Promise;
-  var db = mongoose.connect( config.db );
+  var db = mongoose.connect(config.db, { useMongoClient: true });
 
   require('../app/models/user.server.model');
   require('../app/models/artista.server.model');

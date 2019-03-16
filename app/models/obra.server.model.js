@@ -34,17 +34,17 @@ ObraSchema.statics.findByAutor = function (autor, callback) {
 };
 
 ObraSchema.statics.findByFiltro = function (filtro, callback) {
-  this.$where( function () {
+  this.$where(function () {
     return
       this.titulo.toLowerCase().includes(filtro.toLowerCase()) ||
       this.autor.toLowerCase().includes(filtro.toLowerCase());
-  }, callback);
-};
+  }, callback)
+}
 
 ObraSchema.statics.findByCategoria = function (categoria, callback) {
-  this.find( { "categoria": new RegExp( '^'+categoria+'$', 'i' ) }, callback);
-};
+  this.find({ categoria: new RegExp(`^${categoria}$`, 'i') }, callback)
+}
 
-ObraSchema.set( 'toJSON', { getters: true } );
+ObraSchema.set( 'toJSON', { getters: true })
 
-mongoose.model('Obra', ObraSchema);
+mongoose.model('Obra', ObraSchema)

@@ -37,13 +37,11 @@ module.exports = function( db ) {
   app.use( methodOverride() );
 
   // Cosas de login
-  var mongoStore = new MongoStore( {mongooseConnection: db.connection } );//parseo la sesion y la guardo en mongo
-
-  app.use( session( {
+  app.use(session({
     saveUninitialized: true,
     resave: true,
     secret: config.sessionSecret,
-    store: mongoStore,
+    store: new MongoStore({ url: config.db }) // parseo la sesion y la guardo en mongo,
   }));
 
   app.use( flash() ); //mensajes sobre errores de logeo y etc
@@ -52,7 +50,7 @@ module.exports = function( db ) {
 
   // Sets de Express
   app.set( 'views', './app/views' );
-  app.set( 'view engine', 'jade' );
+  app.set( 'view engine', 'pug' );
 
   //Require a las rutas
   require( '../app/routes/user.server.route.js' )( app );

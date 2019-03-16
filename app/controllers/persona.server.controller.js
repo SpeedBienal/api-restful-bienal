@@ -1,103 +1,60 @@
 var Persona = require('mongoose').model('Persona');
+const helpers = require('../helpers');
+const responser = helpers.responser;
+const passer = helpers.passer;
 
-exports.list = function (req, res, next) {
-  Persona.find({}, function (err, personas) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(personas);
-    }
-  });
+
+exports.list = (req, res, next) => {
+  Persona.find().lean().exec(responser(res))
 };
 
-exports.create = function (req, res, next) {
-  var persona = new Persona( req.body );
-  persona.save(function (err) {
-    if (err) {
-      return next(err);
-    } else {
-      var io = global.io;
-      io.emit('voto',{
+exports.create = (req, res, next) => {
+  var persona = new Persona(req.body);
+  persona.save((err) => {
+    if (err) return next(err);
+    else {
+      global.io.emit('voto', {
         type: 'status',
         text: 'connected',
-        created: Date.now(),
+        created: new Date(),
       });
       res.json(persona);
     }
   });
 };
 
-exports.read = function (req, res) {
-  res.json( req.persona );
+exports.read = (req, res) => { res.json(req.persona); };
+
+exports.update = (req, res, next) => {
+  Persona.findByIdAndUpdate(req.persona._id, persona.body, responser(res))
 };
 
-exports.update = function (req, res, next) {
-  Persona.findByIdAndUpdate( req.persona._id, persona.body, function (err, persona) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json( persona );
-    }
-  });
-};
+exports.delete = (req, res, next) => { req.persona.remove(responser(res)) };
 
-exports.delete = function (req, res, next) {
-  req.persona.remove( function ( err, persona ) {
-    if ( err ) {
-      return next( err );
-    } else {
-      res.json( req.persona );
-    }
-  });
-};
-
-exports.requireMobile = function ( req, res, next ) {
-  if ( !req.body.hasOwnProperty(uuid) ) {
-    return res.status(401).send( { message: 'Not allowed' } );
-  }
-  next();
+exports.requireMobile = (req, res, next) => {
+  if (!req.body.hasOwnProperty('uuid'))
+    return res.status(401).send({ message: 'Not allowed' });
+  else next();
 };
 
 
 
-exports.personaById = function (req, res, next, id) {
-  Persona.findOne({ _id: id }, function (err, persona) {
-    if (err) {
-      return next(err);
-    } else {
-      req.persona = persona;
-      next();
-    }
-  });
+exports.personaById = (req, res, next, id) => {
+  Persona.findById(id, passer(req, 'persona', next))
 };
 
-exports.personaByUuId = function (req, res, next, persona_uuid) {
-  Persona.findOne( {uuid: persona_uuid}, function (err, persona) {
-    if (err) {
-      return next(err);
-    } else {
-      req.persona = persona;
-      next();
-    }
-  });
+exports.personaByUuId = (req, res, next, persona_uuid) => {
+  Persona.findOne({ uuid: persona_uuid }, passer(req, 'persona', next))
 };
 
-exports.puedeVotar = function (req, res, next) {
-  Persona.find({ email: req.body.email }, function (err, persona_mail) {
-    if (err) {
-      return next(err);
-    } else {
-      Persona.find({ dni: req.body.dni }, function (err, persona_dni) {
-        if (err) {
-          return next(err);
-        } else {
-          if (persona_dni.length === 0 && persona_mail.length === 0) {
-            res.json({ puede_votar: true });
-          } else {
-            res.json({ puede_votar: false });
-          }
-        }
-      });
-    }
-  });
+exports.puedeVotar = (req, res, next) => {
+  Promise
+    .all([
+      Persona.find({ email: req.body.email }).lean().exec(),
+      Persona.find({ dni: req.body.dni }).lean().exec(),
+    ])
+    .then(([porEmail, porDni]) => {
+      res.json({ puede_votar: !porEmail.length && !porDni.length });
+    })
+    .catch()
 };
